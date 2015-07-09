@@ -1,4 +1,4 @@
-﻿SELECT i.anio AS a,
+﻿SELECT i.anios AS a,
     i.pais,
     round(i.gastoturist::numeric, 2) AS gastoturist,
     round(p.alfabetizacion ::numeric, 2) AS alfabetizacion,
@@ -7,7 +7,7 @@
 	
  FROM 
  
-(SELECT 	extract(year from fact_indicador.fin_fecha) AS anio,
+(SELECT 	extract(year from fact_indicador.fin_fecha) AS anios,
 		dim_pais.pai_pais AS pais,
 		dim_indicador.ind_tipo AS tipo,
 		fact_indicador.fin_valor AS gastoturist
@@ -21,7 +21,7 @@
 		AND dim_pais.pai_sk in (239,210,294,272,292,150,204,206)
 		AND dim_indicador.ind_sk = fact_indicador.fin_ind_sk) i 
         
- join 		(SELECT extract(year from fact_indicador.fin_fecha) AS anio,
+ join 		(SELECT extract(year from fact_indicador.fin_fecha) AS anios,
 		dim_pais.pai_pais AS pais,
 		dim_indicador.ind_tipo AS tipo,
 		fact_indicador.fin_valor AS alfabetizacion
@@ -35,7 +35,7 @@
 		AND dim_pais.pai_sk in (239,210,294,272,292,150,204,206)
 		AND dim_indicador.ind_sk = fact_indicador.fin_ind_sk) p ON i.anio = p.anio and i.pais = p.pais 
 
-join 	(SELECT extract(year from fact_indicador.fin_fecha) AS anio,
+join 	(SELECT extract(year from fact_indicador.fin_fecha) AS anios,
 		dim_pais.pai_pais AS pais,
 		dim_indicador.ind_tipo AS tipo,
 		fact_indicador.fin_valor AS Infrateleco
@@ -49,7 +49,7 @@ join 	(SELECT extract(year from fact_indicador.fin_fecha) AS anio,
 		AND dim_pais.pai_sk in (239,210,294,272,292,150,204,206)
 		AND dim_indicador.ind_sk = fact_indicador.fin_ind_sk) o ON i.anio = o.anio and i.pais = o.pais
 
-   join 	(SELECT extract(year from fact_indicador.fin_fecha) AS anio,
+   join 	(SELECT extract(year from fact_indicador.fin_fecha) AS anios,
 		dim_pais.pai_pais AS pais,
 		dim_indicador.ind_tipo AS tipo,
 		fact_indicador.fin_valor AS Inverteleco
